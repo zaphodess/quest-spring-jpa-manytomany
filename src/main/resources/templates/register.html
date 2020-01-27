@@ -31,7 +31,7 @@
     <label for="course">Register a course:</label>
     <select id="course" name="idCourse">
         <option th:each="course : ${allCourses}" th:text="${course.name}"
-                th:value="${course.id}">wizard name
+                th:value="${course.id}" th:if="${not #lists.contains(wizard.courses, course)}">wizard name
         </option>
     </select>
     <input type="submit" value="Send">

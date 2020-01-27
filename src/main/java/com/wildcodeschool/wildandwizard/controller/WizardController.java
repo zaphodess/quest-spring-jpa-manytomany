@@ -14,12 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 public class WizardController {
-
+	
     @Autowired
     private CourseRepository courseRepository;
 
@@ -81,7 +84,8 @@ public class WizardController {
                 if (method != null) {
                     try {
                         courses = (List<Course>) method.invoke(wizard);
-                        courses.add(course);
+                        if (!courses.contains(course))
+                        	courses.add(course);
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
                     }
